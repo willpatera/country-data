@@ -3,7 +3,8 @@ gulp = require "gulp"
 gutil = require "gulp-util"
 
 fs = require "fs"
-
+coffee = require "gulp-coffee"
+concat = require "gulp-concat"
 
 build = ->
   gulp.src "src/*.coffee"
@@ -11,8 +12,10 @@ build = ->
     bare: true
     )
   .pipe concat "main.js"
-  .pipe fs.mkdirSync "build"
   .pipe gulp.dest "build"
 
-gulp.task 'default' ['build'], ->
-	gutil.log gutil.colors.white.bgBlue("Build..."), "Complete"
+gulp.task "build", ->
+  build()
+
+gulp.task 'default', ['build'], ->
+  gutil.log gutil.colors.white.bgBlue("Build..."), "Complete"
